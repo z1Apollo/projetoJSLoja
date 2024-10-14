@@ -1,0 +1,132 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Fredoka", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
+}
+
+.home {
+    display: flex;
+    justify-content: space-between;
+    background-color: #ccc;
+    padding: 30px;
+    padding-left: 6rem;
+    padding-right: 6rem;
+}
+
+.caixa-home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo {
+    text-decoration: none;
+    color: black;
+    font-size: 40px;
+    font-weight: 400;
+}
+
+.caixa-carrinho {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.logo-img {
+    width: 60px;
+}
+
+.carro-img {
+    width: 40px;
+}
+
+#botao {
+    border: none;
+    cursor: pointer;
+    background-color: #ccc;
+}
+
+#number {
+    font-size: 30px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.produtos {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.produto-card {
+    background-color: #fff;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 5px #ffffff10;
+    transition: transform 0.2s;
+    width: 250px;
+    height: 450px;
+    cursor: pointer;
+}
+
+.card-produto {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.produto-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 20px;
+    width: 200px;
+    height: 200px;
+}
+
+.produto-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 5px;
+    font-size: 18px;
+}
+
+.produto-card:hover {
+    transform: scale(1.05);
+}
+
+.caixa-btnjs {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 15px;
+}
+
+#btn-prod {
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 10px;
+    transition: transform 0.2s;
+}
+
+#btn-prod:hover {
+    background-color: green;
+    transform: scale(1.05);
+}

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+
+    <title>Projeto Loja</title>
+
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: "Fredoka", sans-serif;
+font-optical-sizing: auto;
+font-weight: 500;
+font-style: normal;
+font-variation-settings: "wdth" 100;
+}
+
+.home {
+display: flex;
+justify-content: space-between;
+background-color: #ccc;
+padding: 30px;
+padding-left: 6rem;
+padding-right: 6rem;
+}
+
+.caixa-home {
+display: flex;
+justify-content: center;
+align-items: center;
+gap: 10px;
+}
+
+.logo {
+text-decoration: none;
+color: black;
+font-size: 40px;
+font-weight: 400;
+}
+
+.logo-img {
+width: 60px;
+}
+
+.caixa-carrinho {
+display: flex;
+gap: 10px;
+align-items: center;
+}
+
+.back {
+font-size: 40px;
+}
+
+.caixa-carrinho {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px; 
+    padding: 20px;
+}
+
+.produto-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    background-color: #fff; 
+    transition: transform 0.2s; 
+}
+
+.produto-card:hover {
+    transform: scale(1.05); 
+}
+
+.produto-title {
+    font-size: 18px;
+    font-weight: 600; 
+    margin-bottom: 10px;
+}
+
+.produto-img {
+    width: 40%; 
+    height: 300px;
+    margin: 10px 0;
+}
+
+.produto-preco {
+    font-size: 16px; 
+    color: #333; 
+    font-weight: 500;
+}
+
+.comprar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.comprar a {
+    text-decoration: none;
+    color: black;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 20px;
+    transition: transform 0.2s;
+}
+
+.comprar a:hover {
+    transform: scale(1.5);
+}
+</style>
+</head>
+<body>
+    <header>
+        <nav class="home">
+          <div class="caixa-home">
+            <img class="logo-img" src="./images/inf.jpeg" alt="logo infinity style">
+            <a class="logo" href="./index.html">Infinity Style</a>
+          </div>
+          <div class="caixa-back">
+            <p class="back">Carrinho</p>
+          </div>
+        </nav>
+      </header>
+
+      <main class="container">
+        <div class="caixa-carrinho" id="carrinho"></div>
+      </main>
+
+      <div class="comprar">
+        <a href="./index.html">Comprar</a>
+      </div>
+
+    <script lang="javascript">
+async function fetchProdutoById(id) {
+    const url = `https://fakestoreapi.com/products/${id}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error('Erro ao buscar o produto');
+    }
+    return response.json();
+}
+
+async function displayCarrinho() {
+    const carrinhoIds = JSON.parse(localStorage.getItem('carrinho')) || [];
+    const carrinhoContainer = document.getElementById("carrinho");
+    carrinhoContainer.innerHTML = '';
+
+    if (carrinhoIds.length === 0) {
+        carrinhoContainer.innerHTML = '<p>Seu carrinho está vazio.</p>';
+        return;
+    }
+
+    for (const id of carrinhoIds) {
+        try {
+            const produto = await fetchProdutoById(id);
+            const produtoCard = document.createElement('div');
+            produtoCard.className = 'produto-card';
+            produtoCard.innerHTML = `
+                <h2 class="produto-title">${produto.title}</h2>
+                <img class="produto-img" src="${produto.image}" alt="${produto.title}">
+                <p class="produto-preco">R$ ${produto.price.toFixed(2)}</p>
+            `;
+            carrinhoContainer.appendChild(produtoCard);
+        } catch (error) {
+            console.error('Erro ao buscar o produto:', error);
+        }
+    }
+}
+
+window.onload = displayCarrinho;
+    </script>
+</body>
+</html>
